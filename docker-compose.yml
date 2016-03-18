@@ -1,6 +1,6 @@
 mongo3:
   hostname: mongo3
-  image: mongo:3.0.6
+  image: mongo:3.2.4
   entrypoint: [ "/usr/bin/mongod", "--replSet", "rs", "--journal", "--smallfiles", "--rest" ]
   ports:
     - "27018:27017"
@@ -9,7 +9,7 @@ mongo3:
 
 mongo2:
   hostname: mongo2
-  image: mongo:3.0.6
+  image: mongo:3.2.4
   entrypoint: [ "/usr/bin/mongod", "--replSet", "rs", "--journal", "--smallfiles", "--rest" ]
   ports:
     - "27019:27017"
@@ -18,7 +18,7 @@ mongo2:
 
 mongo1:
   hostname: mongo1
-  image: mongo:3.0.6
+  image: mongo:3.2.4
   entrypoint: [ "/usr/bin/mongod", "--replSet", "rs", "--journal", "--smallfiles", "--rest" ]
   ports:
     - "27017:27017"
@@ -44,7 +44,7 @@ elasticsearch:
 
 # This configures the MongoDB replicaset
 mongosetup:
-  image: mongo:3.0.6
+  image: mongo:3.2.4
   links:
     - mongo1:mongo1
     - mongo2:mongo2
@@ -93,7 +93,7 @@ transporter:
 
 # Make sure ES does not rellocate it's shards when it has low disk space.
 disabledisktreshold:
-  image: mongo:3.0.6
+  image: mongo:3.2.4
   links:
     - elasticsearch:elasticsearch
   volumes:
@@ -103,7 +103,7 @@ disabledisktreshold:
 # Verify reading and writing
 # Run 'docker logs -f elasticmongo_verify_1' to see what it outputs.
 verify:
-  image: mongo:3.0.6
+  image: mongo:3.2.4
   links:
     - mongo1:mongo1
     - mongo2:mongo2
